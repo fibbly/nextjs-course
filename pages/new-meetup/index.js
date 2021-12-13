@@ -1,8 +1,18 @@
 import NewMeetupForm from "../../components/meetups/NewMeetupForm";
 
 function NewMeetupPage() {
-	function addMeetup(form) {
-		console.log(form);
+	async function addMeetup(formData) {
+		const response = await fetch("/api/new-meetup", {
+			method: "POST",
+			body: JSON.stringify(formData),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
+
+		const data = await response.json();
+
+		console.log(response);
 	}
 
 	return <NewMeetupForm onAddMeetup={addMeetup} />;
